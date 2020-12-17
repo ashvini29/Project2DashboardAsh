@@ -43,7 +43,7 @@ df = pd.DataFrame({
 fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
 
 app.layout = html.Div([
-    html.H1('Ashvini Project2 Dashboard!', style={'textAlign': 'center'}),
+    html.H1('Ashvini Project2 Dashboard Telecom!', style={'textAlign': 'center'}),
     html.Div([html.H4('Number of rows to display:'),
               dcc.Slider(id="num_row_slider", min=0, max=min(10, len(df)), value=6,
               marks={i:str(i) for i in range(len(df)+1)}),
@@ -72,17 +72,17 @@ app.layout = html.Div([
      Input(component_id='sort_by_dropdown', component_property='value')]
 )
 def update_table(num_rows_to_show, fruits_to_display, sort_by):
-    x = df[df.Fruit.isin(fruits_to_display)].sort_values(sort_by, ascending=(sort_by != "Amount"))
-    return generate_table(x, max_rows=num_rows_to_show)
+    #x = df[df.Fruit.isin(fruits_to_display)].sort_values(sort_by, ascending=(sort_by != "Amount"))
+    return generate_table(dataframe, max_rows=num_rows_to_show)
 
 # Update the slider max
-@app.callback(
-    Output(component_id='num_row_slider', component_property='max'),
-    [Input(component_id='fruit_select_checklist', component_property='value')]
-)
-def update_slider(fruits_to_display):
-    x = df[df.Fruit.isin(fruits_to_display)]
-    return min(10, len(x))
+#@app.callback(
+#    Output(component_id='num_row_slider', component_property='max'),
+#    [Input(component_id='fruit_select_checklist', component_property='value')]
+#)
+#def update_slider(fruits_to_display):
+#    x = df[df.Fruit.isin(fruits_to_display)]
+#    return min(10, len(x))
 
 
 if __name__ == '__main__':
